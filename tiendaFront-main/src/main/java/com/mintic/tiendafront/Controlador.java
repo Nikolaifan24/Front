@@ -55,7 +55,6 @@ public class Controlador {
 	public String crearUsuario(Model model, Usuario usuario) {
 
 		clienteTienda.nuevoUsuario(usuario);
-
 		model.addAttribute("tipoDocumento", clienteTienda.getTipoDocumento());
 		model.addAttribute("usuarios", clienteTienda.getUsuarios());
 

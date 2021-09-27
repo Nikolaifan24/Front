@@ -25,12 +25,12 @@
 
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Usuarios
+				<li class="nav-item active"><a class="nav-link" href="/usuario">Usuarios
 
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Clientes</a>
+				<li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Proveedores</a></li>
+				<li class="nav-item"><a class="nav-link" href="/proveedores">Proveedores</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
 
@@ -67,8 +67,6 @@
 					<label>tipo Documento :</label> <select name="idTipoDocumento"
 						class="form-select">
 						<option value="0">Seleccionar</option>
-						<option value="1">Tarjeta de identidad</option>
-						<option value= "2">Cedula de Ciudadania</option>
 						<c:forEach items="${tipoDocumento}" var="tipos">
 							<option value="${tipos.id}"
 								${tipos.id == usuarioEditar.idTipoDocumento.id  ? 'selected' : '0' }>${tipos.tipo}</option>
@@ -103,15 +101,16 @@
 				</div>
 				</div>
 				<br>
-				
-				<button onclick="getData()" type="button" class="btn btn-outline-primary g-col-6 g-col-md-4">Consultar</button>
-    			<button type="button" class="btn btn-outline-secondary g-col-6 g-col-md-4">Crear</button>
-    			<button type="button" class="btn btn-outline-success g-col-6 g-col-md-4">Actualizar</button>
-    			<button type="button" class="btn btn-outline-danger g-col-6 g-col-md-4">Borrar</button>
 			</form>
-		
+				
+				
 		</div>
-		<br> <br>
+		<br> 		
+		<button onclick="getData()" type="button" class="btn btn-outline-primary g-col-6 g-col-md-4">Consultar</button>
+    	<a type="button" class="btn btn-outline-secondary g-col-6 g-col-md-4"  href="/usuario" >Crear</a>
+    	<a type="button" class="btn btn-outline-success g-col-6 g-col-md-4"<c:forEach items="${usuarios}" var="usuario"> href="/usuario/${usuario.id}" </c:forEach> >Actualizar</a>
+    	<a type="button" class="btn btn-outline-danger g-col-6 g-col-md-4" <c:forEach items="${usuarios}" var="usuario"> href="/eliminarusuario/${usuario.id}" </c:forEach> >Borrar</a>
+    	<br>
 
 		<table class="table">
 			<thead>
@@ -121,8 +120,7 @@
 					<th>Numero</th>
 					<th>Nombre</th>
 					<th>Nombre usuario</th>
-					<th colspan="2">Operaciones</th>
-
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -133,10 +131,7 @@
 						<td>${usuario.numeroDocumento}</td>
 						<td>${usuario.nombre}</td>
 						<td>${usuario.nombreUsuario}</td>
-						<td><a class="btn btn-danger"
-							href="/eliminarusuario/${usuario.id}">Eliminar</a></td>
-						<td><a class="btn btn-success" href="/usuario/${usuario.id}">Actualizar</a></td>
-					</tr>
+						</tr>
 				</c:forEach>
 			</tbody>
 		</table>
