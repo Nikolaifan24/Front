@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="assets/css/css.css" />
 
 </head>
+<body background="https://w7.pngwing.com/pngs/19/911/png-transparent-computer-security-computer-icons-threat-security-miscellaneous-computer-network-computer-wallpaper.png" opacity=0.8>
 <body>
 	
     <div class="container">

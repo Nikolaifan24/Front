@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="ISO-8859-1">
 <title>usuario</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/css.css" />
@@ -18,9 +19,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
+<link href="style.css" rel="stylesheet" type="text/css" />	
+	
 </head>
+
+<body background="https://img.lovepik.com/photo/40109/9825.jpg_wh860.jpg" opacity=0.8>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar--dark bg-dark">
 		<a class="navbar-brand" href="/menu">Tienda</a>
 
 		<div class="collapse navbar-collapse" id="navbarText">
@@ -43,24 +48,7 @@
 	<h1> Usuarios</h1>
 
 	<div class="container overflow-hidden">
-		<% 
-		
-			
-		/*List<TipoDocumento> tp =(List<TipoDocumento>) request.getAttribute("tipoDocumento");
-		
-		//request.getAttribute("tipoDocumento");
-		Iterator<TipoDocumento> iteracion = tp.iterator();
-						TipoDocumento td = null;
 
-						while (iteracion.hasNext()) {
-							td = iteracion.next();
-							out.print(td.getTipo());
-						}
-		 
-		
-		out.print("----"+request.getAttribute("tipoDocumento"));
-		*/
-		%>
 		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
 			<form method="post" action="/usuario">
 				<div class="form-group">
@@ -101,18 +89,21 @@
 				</div>
 				</div>
 				<br>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="submit" class="btn btn-primary" formmethod="post" >Crear</button>
+				<c:forEach items="${usuarios}" var="usuario"> </c:forEach>
+		  		<a type="button" class="btn btn-secondary" href= "/usuario" >Consultar</a>
+		 		<a type="button" class="btn btn-success" href= "/usuario/${usuario.id}" >Actualizar</a>
+		 		<a type="button" class="btn btn-danger" href= "/eliminarusuario/${usuario.id}" >Eliminar</a>
+				</div>
+				
+				
 			</form>
-				
-				
+					
 		</div>
 		<br> 		
-		<button onclick="getData()" type="button" class="btn btn-outline-primary g-col-6 g-col-md-4">Consultar</button>
-    	<a type="button" class="btn btn-outline-secondary g-col-6 g-col-md-4"  href="/usuario" >Crear</a>
-    	<a type="button" class="btn btn-outline-success g-col-6 g-col-md-4"<c:forEach items="${usuarios}" var="usuario"> href="/usuario/${usuario.id}" </c:forEach> >Actualizar</a>
-    	<a type="button" class="btn btn-outline-danger g-col-6 g-col-md-4" <c:forEach items="${usuarios}" var="usuario"> href="/eliminarusuario/${usuario.id}" </c:forEach> >Borrar</a>
-    	<br>
-
-		<table class="table">
+		
+    <table class="table">
 			<thead>
 				<tr>
 					<th>#</th>

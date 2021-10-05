@@ -14,9 +14,11 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 <title>Menu</title>
+<link href="style.css" rel="stylesheet" type="text/css" />	
 </head>
+<body background="https://www.fisagrp.com/assets/images/blog/last/5-formas-inteligencia-artificial-banca-covid.jpg" >
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="/menu">Tienda</a>
 
 		<div class="collapse navbar-collapse" id="navbarText">

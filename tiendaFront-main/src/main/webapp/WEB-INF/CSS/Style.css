@@ -1,20 +1,13 @@
 @charset "ISO-8859-1";
-pre, p {
-    font-size: 1.5em;
-    color: #FE7F88;
-    background-color: transparent;
+body {
+  height:665px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image:"https://cdn.pixabay.com/photo/2016/02/17/19/08/lotus-1205631_960_720.jpg";
+  
 }
-
-div {
-  background-image: url("https://w7.pngwing.com/pngs/19/911/png-transparent-computer-security-computer-icons-threat-security-miscellaneous-computer-network-computer-wallpaper.png");
-}
-
 p {
-  background-image: none;
+  text-align: right;
 }
-
-.catsandstars {
-  background-image: url("https://w7.pngwing.com/pngs/19/911/png-transparent-computer-security-computer-icons-threat-security-miscellaneous-computer-network-computer-wallpaper.png");                      
-  background-color: transparent;
-}
-
+.link { color: #000000; }
+.link:hover { color: #010331; }
