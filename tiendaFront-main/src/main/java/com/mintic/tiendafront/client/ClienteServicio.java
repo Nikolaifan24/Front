@@ -56,7 +56,7 @@ public class ClienteServicio implements ICliente {
 		
 		try 
 		{
-			Mono<List> response = webClient.build().get().uri(URL + "/usuarios").retrieve().bodyToMono(List.class);
+			Mono<List> response = webClient.build().get().uri(URL + "/cliente").retrieve().bodyToMono(List.class);
 
 			return response.block();
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class ClienteServicio implements ICliente {
 		try {
 
 			ClienteDto u = null;
-			Mono<ClienteDto> response = webClient.build().post().uri(URL + "/usuarios")
+			Mono<ClienteDto> response = webClient.build().post().uri(URL + "/cliente")
 					.body(Mono.just(clienteDto), ClienteDto.class).retrieve().bodyToMono(ClienteDto.class);
 
 			u = response.block();

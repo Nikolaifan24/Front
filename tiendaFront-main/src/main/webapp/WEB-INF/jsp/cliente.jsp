@@ -18,7 +18,7 @@
 	crossorigin="anonymous"></script>
 	<link href="style.css" rel="stylesheet" type="text/css" />	
 </head>
-<body background="https://gestion.pe/resizer/MrLOpDJGQoP5AL5lot_EbTJQe2U=/980x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/4BTZG6UFINCYLJD4HY3QMA2LDQ.jpg" opacity=0.8>
+<body  opacity=0.8>
 <body>
 <nav class="navbar navbar-expand-lg navbar--dark bg-dark">
 		<a class="navbar-brand" href="/menu">Tienda</a>
@@ -41,6 +41,49 @@
 	</nav>
 	<br>
 	<h1> Cliente</h1>
+	
+	
+	
+	
+	
+	<div class="container">
+		<div th:replace="/NavBar" :: navbar></div>
+		<div th:switch="${usuarios}">
+			<h2 th:case="null">No hay Clientes para mostrar!</h2>
+			<div th:case="*">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Numero Documento</th>
+							<th scope="col">Direccion</th>
+							<th scope="col">Email</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Telefono</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente : ${cliente}">
+							<td th:text="${cliente.idTipoDocumento}"></td>
+							<td th:text="${cliente.numeroDocumento}"></td>
+							<td th:text="${cliente.direccion}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.nombre}"></td>
+							<td th:text="${cliente.telefono}"></td>
+							<td><a type="button" class="btn btn-secondary" href="ActualizarCliente/{id}(id=${cliente.Id})">Actualizar</a></td>
+							<td><a type="button" class="btn btn-danger" href="Eliminarcliente/{id}(id=${cliente.Id})">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p>
+				<a type="button" class="btn btn-primary"  href="/AgregarCliente">Agregar Cliente</a>
+			</p>
+		</div>
+	</div>
+	
+	
+	
 	<div class="container overflow-hidden">
 	 <div class="row gy-5">
       <div class="col-6">

@@ -25,6 +25,11 @@ public class ClienteController {
 		return "AgregarCliente";
 	}
 	
+	@GetMapping("/ActualizarCliente")
+	public String index2() {
+		return "ActualizarCliente";
+	}
+	
 	@GetMapping("/EliminarCliente/{id}") //cliente
 	public String EliminarCliente(Model model, @PathVariable(name = "id") int id) {
 
