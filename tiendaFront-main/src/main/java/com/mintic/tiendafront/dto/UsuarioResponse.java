@@ -5,27 +5,15 @@ public class UsuarioResponse {
 	
 	private Long id;
 	
-	private TipoDocumento idTipoDocumento;
+	private String nombreUsuario;
+	
+	private Long cedulaUsuario;
 
-	private String numeroDocumento;
-
-	private String nombre;
+	private String usuario;
 
 	private String password;
 
-	private String email;
-	
-	
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	private String nombreUsuario;
+	private String emailUsuario;
 
 	public Long getId() {
 		return id;
@@ -34,29 +22,29 @@ public class UsuarioResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public TipoDocumento getIdTipoDocumento() {
-		return idTipoDocumento;
+	
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setIdTipoDocumento(TipoDocumento idTipoDocumento) {
-		this.idTipoDocumento = idTipoDocumento;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getNumeroDocumento() {
-		return numeroDocumento;
+	public Long getCedulaUsuario() {
+		return cedulaUsuario;
 	}
 
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+	public void setCedulaUsuario(Long cedulaUsuario) {
+		this.cedulaUsuario = cedulaUsuario;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getPassword() {
@@ -67,12 +55,16 @@ public class UsuarioResponse {
 		this.password = password;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getEmailUsuario() {
+		return emailUsuario;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}	
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
+	}
+	
+	
+	
+	
 	
 }

@@ -19,7 +19,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
-<link href="style.css" rel="stylesheet" type="text/css" />	
+<link href="Style.css" rel="stylesheet" type="text/css" />	
 	
 </head>
 
@@ -52,13 +52,10 @@
 		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
 			<form method="post" action="/usuario">
 				<div class="form-group">
-					<label>tipo Documento :</label> <select name="idTipoDocumento"
+				 <select name="idTipoDocumento"
 						class="form-select">
 						<option value="0">Seleccionar</option>
-						<c:forEach items="${tipoDocumento}" var="tipos">
-							<option value="${tipos.id}"
-								${tipos.id == usuarioEditar.idTipoDocumento.id  ? 'selected' : '0' }>${tipos.tipo}</option>
-						</c:forEach>
+						
 					</select>
 				</div>
 
@@ -67,16 +64,16 @@
 					<input type="hidden" name="id" value="${usuarioEditar.id}">
 
 					<label for="numero"> numero:</label><input type="text"
-						name="numeroDocumento" id="numero"
-						value="${usuarioEditar.numeroDocumento}" class="form-control" />
+						name="cedulaUsuario" id="numero"
+						value="${usuarioEditar.cedulaUsuario}" class="form-control" />
 				</div>
 				<div class="form-group">
-					<label>nombre:</label><input type="text" name="nombre"
-						class="form-control" value="${usuarioEditar.nombre}" />
+					<label>nombre:</label><input type="text" name="usuario"
+						class="form-control" value="${usuarioEditar.usuario}" />
 				</div>
 				<div class="form-group">
-					<label>Email:</label><input type="text" name="email"
-						class="form-control" value="${usuarioEditar.email}" />
+					<label>Email:</label><input type="text" name="emailUsuario"
+						class="form-control" value="${usuarioEditar.emailUsuario}" />
 				</div>
 				<div class="form-group">
 					<label> nombre usuario:</label> <input type="text"
@@ -91,11 +88,8 @@
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="submit" class="btn btn-primary" formmethod="post" >Crear</button>
-				<c:forEach items="${usuarios}" var="usuario"> </c:forEach>
-		  		<a type="button" class="btn btn-secondary" href= "/usuario" >Consultar</a>
-		 		<a type="button" class="btn btn-success" href= "/usuario/${usuario.id}" >Actualizar</a>
-		 		<a type="button" class="btn btn-danger" href= "/eliminarusuario/${usuario.id}" >Eliminar</a>
-				</div>
+				<a type="button" class="btn btn-secondary" href= "/usuario" >Consultar</a>
+		 		</div>
 				
 				
 			</form>
@@ -107,21 +101,24 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Tipo documento</th>
 					<th>Numero</th>
-					<th>Nombre</th>
+					<th>Email</th>
+					<th>Usuario</th>
 					<th>Nombre usuario</th>
 					
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${usuarios}" var="usuario">
-					<tr>
+					<tr style=" color: #FFF35F"> 
 						<td>${usuario.id}</td>
-						<td>${usuario.idTipoDocumento.tipo}</td>
-						<td>${usuario.numeroDocumento}</td>
-						<td>${usuario.nombre}</td>
+						<td>${usuario.cedulaUsuario}</td>
+						<td>${usuario.emailUsuario}</td>
+						<td>${usuario.usuario}</td>
 						<td>${usuario.nombreUsuario}</td>
+						<td><a class="btn btn-danger"
+							href="/eliminarusuario/${usuario.cedulaUsuario}">Eliminar</a></td>
+						<td><a class="btn btn-success" href="/usuario/${usuario.cedulaUsuario}">Actualizar</a></td>
 						</tr>
 				</c:forEach>
 			</tbody>

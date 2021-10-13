@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class ClientImp implements IClientTienda {
 
-	private static final String URL = "http://localhost:8090/tiendagenerica/v1";
+	private static final String URL = "http://localhost:8090/tienda";
 
 	@Autowired
 	private WebClient.Builder webClient;
@@ -63,13 +63,15 @@ public class ClientImp implements IClientTienda {
 
 	@Override
 	public UsuarioResponse nuevoUsuario(Usuario usuarioDto) {
-
+			
+		System.out.print("voy aca0"+usuarioDto);	
 		try {
-
+			System.out.print("voy aca1");	
 			UsuarioResponse u = null;
-			Mono<UsuarioResponse> response = webClient.build().post().uri(URL + "/usuarios")
+			Mono<UsuarioResponse> response = webClient.build().post().uri(URL + "/usuario")
 					.body(Mono.just(usuarioDto), UsuarioResponse.class).retrieve().bodyToMono(UsuarioResponse.class);
-
+				
+			
 			u = response.block();
 			return u;
 
@@ -82,11 +84,11 @@ public class ClientImp implements IClientTienda {
 	}
 
 	@Override
-	public UsuarioResponse buscarUsuario(Long id) {
+	public UsuarioResponse buscarUsuario(Long cedulaUsuario) {
 		// TODO Auto-generated method stub
 		try {
 
-			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuarios/" + id)
+			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuario/" + cedulaUsuario)
 					.retrieve().bodyToMono(UsuarioResponse.class);
 
 			return response.block();
@@ -98,10 +100,10 @@ public class ClientImp implements IClientTienda {
 	}
 
 	@Override
-	public int borrarUsuario(Long id) {
+	public int borrarUsuario(Long cedulaUsuario) {
 		try {
 
-			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuarios/" + id)
+			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuario/" + cedulaUsuario)
 					.retrieve().bodyToMono(Integer.class);
 
 			return response.block();
@@ -113,18 +115,5 @@ public class ClientImp implements IClientTienda {
 		}
 	}
 
-	@Override
-	public List<TipoDocumento> getTipoDocumento() {
-		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/tipodocumento").retrieve()
-					.bodyToMono(List.class);
-
-			return response.block();
-		} catch (Exception e) {
-
-			return null;
-		}
-
-	}
 
 }

@@ -4,25 +4,15 @@ public class Usuario {
 
 	private Long id;
 
-	private Long idTipoDocumento;
+	private Long cedulaUsuario;
 
-	private String numeroDocumento;
+	private String usuario;
 
-	private String nombre;
-
-	private String email;
+	private String emailUsuario;
 
 	private String password;
 
 	private String nombreUsuario;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public Long getId() {
 		return id;
@@ -32,28 +22,28 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public Long getIdTipoDocumento() {
-		return idTipoDocumento;
+	public Long getCedulaUsuario() {
+		return cedulaUsuario;
 	}
 
-	public void setIdTipoDocumento(Long idTipoDocumento) {
-		this.idTipoDocumento = idTipoDocumento;
+	public void setCedulaUsuario(Long cedulaUsuario) {
+		this.cedulaUsuario = cedulaUsuario;
 	}
 
-	public String getNumeroDocumento() {
-		return numeroDocumento;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getEmailUsuario() {
+		return emailUsuario;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 
 	public String getPassword() {
@@ -71,4 +61,6 @@ public class Usuario {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
+
+	
 }

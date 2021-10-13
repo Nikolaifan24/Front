@@ -15,9 +15,9 @@ public interface IClientTienda {
 
 	public UsuarioResponse nuevoUsuario(Usuario usuarioDto);
 
-	public UsuarioResponse buscarUsuario(Long id);
+	public UsuarioResponse buscarUsuario(Long cedulaUsuario);
 
-	public int borrarUsuario(Long id);
+	public int borrarUsuario(Long cedulaUsuario);
 
-	public List<TipoDocumento> getTipoDocumento();
+	
 }
