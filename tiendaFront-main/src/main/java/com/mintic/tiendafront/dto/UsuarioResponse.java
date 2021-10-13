@@ -1,7 +1,6 @@
 package com.mintic.tiendafront.dto;
 
-public class UsuarioResponse {
-	
+public class UsuarioResponse {	
 	
 	private Long id;
 	

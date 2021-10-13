@@ -3,30 +3,29 @@ package com.mintic.tiendafront.client;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import com.mintic.tiendafront.dto.ClienteDto;
-import com.mintic.tiendafront.dto.ClienteResponse;
+import com.mintic.tiendafront.dto.Proveedor;
+import com.mintic.tiendafront.dto.ProveedorResponse;
 
 import reactor.core.publisher.Mono;
 
 @Service
-public class ClienteServicio implements ICliente {
-	
+public class ProveedorServicio implements IProveedor {
+
 	private static final String URL = "http://localhost:8090/tienda";
 
 	@Autowired
 	private WebClient.Builder webClient;
 
-	
-
 	@Override
-	public List<ClienteResponse> getClientes() {
-		
+	public List<ProveedorResponse> getProveedores() {
+
 		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/cliente").retrieve()
+			Mono<List> response = webClient.build().get().uri(URL + "/proveedores").retrieve()
 					.bodyToMono(List.class);
 
 			return response.block();
@@ -34,16 +33,18 @@ public class ClienteServicio implements ICliente {
 
 			return null;
 		}
+
 	}
 
 	@Override
-	public ClienteResponse nuevocliente(ClienteDto clienteDto) {
+	public ProveedorResponse nuevoProveedor(Proveedor proveedorDto) {
+			
 		
 		try {
-				
-			ClienteResponse u = null;
-			Mono<ClienteResponse> response = webClient.build().post().uri(URL + "/cliente")
-					.body(Mono.just(clienteDto), ClienteResponse.class).retrieve().bodyToMono(ClienteResponse.class);
+			
+			ProveedorResponse u = null;
+			Mono<ProveedorResponse> response = webClient.build().post().uri(URL + "/proveedor")
+					.body(Mono.just(proveedorDto), ProveedorResponse.class).retrieve().bodyToMono(ProveedorResponse.class);
 				
 			
 			u = response.block();
@@ -54,29 +55,30 @@ public class ClienteServicio implements ICliente {
 			System.out.println("---->" + e.getMessage());
 			return null;
 		}
+
 	}
 
 	@Override
-	public ClienteResponse buscarCliente(Long cedulaCliente) {
-		
+	public ProveedorResponse buscarProveedor(Long nit) {
+		// TODO Auto-generated method stub
 		try {
 
-			Mono<ClienteResponse> response = webClient.build().get().uri(URL + "/cliente/" + cedulaCliente)
-					.retrieve().bodyToMono(ClienteResponse.class);
+			Mono<ProveedorResponse> response = webClient.build().get().uri(URL + "/proveedor/" + nit)
+					.retrieve().bodyToMono(ProveedorResponse.class);
 
 			return response.block();
 		} catch (Exception e) {
 
 			return null;
 		}
+
 	}
 
 	@Override
-	public int borrarCliente(Long cedulaCliente) {
-		
+	public int borrarProveedor(Long nit) {
 		try {
 
-			Mono<Integer> response = webClient.build().delete().uri(URL + "/cliente/" + cedulaCliente)
+			Mono<Integer> response = webClient.build().delete().uri(URL + "/proveedor/" + nit)
 					.retrieve().bodyToMono(Integer.class);
 
 			return response.block();
@@ -87,4 +89,6 @@ public class ClienteServicio implements ICliente {
 			return 0;
 		}
 	}
+
+
 }

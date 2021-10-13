@@ -83,15 +83,7 @@ public class Controlador {
 		return "usuario";
 	}
 	
-	@GetMapping("/cliente")
-	public String cliente(Model model) {
-
-		return "cliente";
-	}
 	
-	@GetMapping("/proveedores")
-	public String proveedores(Model model) {
-		
-		return "proveedores";
-	}
+	
+	
 }

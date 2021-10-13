@@ -1,5 +1,5 @@
 package com.mintic.tiendafront;
-//import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,94 +8,131 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.mintic.tiendafront.client.ICliente;
 import com.mintic.tiendafront.dto.ClienteDto;
-import com.mintic.tiendafront.dto.Usuario;
-import com.mintic.tiendafront.dto.UsuarioResponse;
+import com.mintic.tiendafront.dto.ClienteResponse;
 
 @Controller
 public class ClienteController {
 	
 	@Autowired
-	ICliente icliente;
+	ICliente icliente;	
 	
-	@GetMapping("/AgregarCliente")
-	public String index() {
-		return "AgregarCliente";
-	}
-	
-	@GetMapping("/ActualizarCliente")
-	public String index2() {
-		return "ActualizarCliente";
-	}
-	
-	@GetMapping("/EliminarCliente/{id}") //cliente
-	public String EliminarCliente(Model model, @PathVariable(name = "id") int id) {
-
-		
-		icliente.BorrarCliente(id);
-
-		//model.addAttribute("tipoDocumento", cliente.getCliente());
-		//model.addAttribute("usuarios", cliente.getcliente());
-
-		return "ListaClientes";
-	}
-	
-	
-	////@GetMapping("/usuario")
-	//public String usuario(Model model) {
-
-		//model.addAttribute("tipoDocumento", cliente.getTipoDocumento());
-		//model.addAttribute("usuarios", cliente.getUsuarios());
-		//return "usuario";
-	////}
-	
-	@RequestMapping("/NuevoCliente")
-	public String NuevoCliente(ClienteDto clienteDto, BindingResult result, Model model) {
-		
-		if (result.hasErrors()) {
-            return "ListaClientes";
-        }
-		
-		if(clienteDto.getnumeroDocumento() != null) {
-			//cliente.setIdTipoDocumento(1);
-        	//usuarioRepo.save(usuario);
-			icliente.NuevoCliente(clienteDto);
-			
-            return "redirect:/cliente/NuevoCliente";  //   --> agregar pagina lista clientes       	
-        }else {
-        	return "NuevoCliente2";	
-        }
-
-	}
-	
-	@PostMapping("/ActualizarCliente/{id}")
-	public String ActualizarCliente(Model model, ClienteDto clienteDto, @PathVariable("id") int Id) {
-
-		icliente.ActualizarCliente(Id, clienteDto);
-		//model.addAttribute("tipoDocumento", cliente.getTipoDocumento());
-		//model.addAttribute("usuarios", cliente.getUsuarios());
-
-		return "ListaCliente";
-	}
-
-
-	@GetMapping("BuscarClientePorId/{id}")
-	public String BuscarClientePorId(@PathVariable("id") int Id)
+	@GetMapping("/cliente")
+	public String cliente(Model model) 
 	{
-		icliente.BuscarClientePorId(Id);
+		model.addAttribute("clientes", icliente.getClientes());
 		
-		return "ListaCliente";		
-    }
-	
-	
-	@GetMapping("/ListarClientes")
-	public String ListarClientes(Model model) {
+		if(model.getAttribute("clientes") == null) 
+		{
+			model.addAttribute("mensaje", "No hay datos para mostrar");
+		}	
+		
+		return "cliente";
+	}
 
-		icliente.ListarClientes();
+	@PostMapping("/cliente")
+	public String crearCliente(Model model, ClienteDto cliente) 
+	{
+		Validacion(model, cliente);
 		
-		return "ListaCliente";
+		if(Validacion(model, cliente) == true) 
+		{
+			icliente.nuevocliente(cliente);				
+			model.addAttribute("clientes", icliente.getClientes());
+			model.addAttribute("mensaje", "Cliente Creado");			
+		}		
+
+		return "cliente";
+	}
+
+	@GetMapping("/cliente/{cedulaCliente}")
+	public String actualizarCliente(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente)
+	{
+		ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
+		Validacion(model, clienteEditar);
+		if(Validacion(model, clienteEditar) == true)
+		{			
+			model.addAttribute("clienteEditar", clienteEditar);
+			model.addAttribute("clientes", icliente.getClientes());
+			model.addAttribute("mensaje", "Datos del Cliente Actualizados");
+		}
+
+		return "cliente";
+	}
+
+	@GetMapping("/eliminarcliente/{cedulaCliente}")
+	public String eliminarCliente(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente) {
+
+		icliente.borrarCliente(cedulaCliente);
+		model.addAttribute("clientes", icliente.getClientes());
+		model.addAttribute("mensaje", "Datos del Cliente Eliminados");
+			
+		return "cliente";
+	}
+	
+	private boolean Validacion(Model model, ClienteDto cliente) 
+	{		
+		if(cliente.getcedulaCliente().longValue() == 0) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(cliente.getdireccionCliente().isBlank())
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(cliente.getnombreCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(cliente.getemailCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(cliente.gettelefonoCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}		
+		
+		return true;
+	}
+	
+	private boolean Validacion(Model model, ClienteResponse clienteEditar)
+	{
+		
+		if(clienteEditar.getcedulaCliente().longValue() == 0) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(clienteEditar.getdireccionCliente().isBlank())
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(clienteEditar.getnombreCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(clienteEditar.getemailCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}
+		if(clienteEditar.gettelefonoCliente().isBlank()) 
+		{
+			model.addAttribute("mensaje", "Faltan datos del Cliente");
+			return false;
+		}		
+		
+		return true;
+		
 	}
 
 }

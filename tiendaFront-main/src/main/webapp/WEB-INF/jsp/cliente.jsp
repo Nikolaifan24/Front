@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,93 +42,88 @@
 		</div>
 	</nav>
 	<br>
-	<h1> Cliente</h1>
-	
-	
-	
-	
-	
-	<div class="container">
-		<div th:replace="/NavBar" :: navbar></div>
-		<div th:switch="${usuarios}">
-			<h2 th:case="null">No hay Clientes para mostrar!</h2>
-			<div th:case="*">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Tipo Documento</th>
-							<th scope="col">Numero Documento</th>
-							<th scope="col">Direccion</th>
-							<th scope="col">Email</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Telefono</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="cliente : ${cliente}">
-							<td th:text="${cliente.idTipoDocumento}"></td>
-							<td th:text="${cliente.numeroDocumento}"></td>
-							<td th:text="${cliente.direccion}"></td>
-							<td th:text="${cliente.email}"></td>
-							<td th:text="${cliente.nombre}"></td>
-							<td th:text="${cliente.telefono}"></td>
-							<td><a type="button" class="btn btn-secondary" href="ActualizarCliente/{id}(id=${cliente.Id})">Actualizar</a></td>
-							<td><a type="button" class="btn btn-danger" href="Eliminarcliente/{id}(id=${cliente.Id})">Eliminar</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<p>
-				<a type="button" class="btn btn-primary"  href="/AgregarCliente">Agregar Cliente</a>
-			</p>
-		</div>
-	</div>
-	
-	
-	
-	<div class="container overflow-hidden">
-	 <div class="row gy-5">
-      <div class="col-6">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Cédula</label>
-        <div class="col-sm-10">
-          <input class="form-control" id="cedula">
-        </div>
-      </div>
-      <div class="col-6">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Usuario</label>
-        <div class="col-sm-10">
-          <input class="form-control" id="usuario">
-        </div>
-      </div>
-      <div class="col-6">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Nombre </label>
-        <div class="col-sm-10">
-          <input class="form-control" id="nombre">
-        </div>
-      </div>
-      <div class="col-6">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
-        <div class="col-sm-10">
-          <input class="form-control" id="inputPassword">
-        </div>
-      </div>
-      <div class="col-6">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Correo</label>
-        <div class="col-sm-10">
-          <input class="form-control" id="correo">
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="grid" style="text-align: center ">
-    <button onclick="getData()" type="button" class="btn btn-primary g-col-6 g-col-md-4">Consultar</button>
-    <button type="button" class="btn btn-secondary g-col-6 g-col-md-4">Crear</button>
-    <button type="button" class="btn btn-success g-col-6 g-col-md-4">Actualizar</button>
-    <button type="button" class="btn btn-danger g-col-6 g-col-md-4">Borrar</button>
+	<h1> Clientes</h1>
 
-  </div>
+	<div class="container overflow-hidden">
+
+		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
+			<form method="post" action="/cliente">		
+
+				<div class="container overflow-hidden">
+				<div class="form-group">
+					<input type="hidden" name="id" value="${clienteEditar.id}">
+
+					<label for="numero"> numero:</label><input type="text"
+						name="cedulaCliente" id="numero"
+						value="${clienteEditar.cedulaCliente}" class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label>Direccion Cliente:</label> <input type="text" name="direccionCliente" 
+					class="form-control"
+						value="${clienteEditar.direccionCliente}" />
+				</div>
+				
+				<div class="form-group">
+					<label>Nombre Cliente:</label><input type="text" name="nombreCliente"
+						class="form-control" value="${clienteEditar.nombreCliente}" />
+				</div>
+				
+				<div class="form-group">
+					<label>Email:</label><input type="text" name="emailCliente"
+						class="form-control" value="${clienteEditar.emailCliente}" />
+				</div>			
+				
+				
+				<div class="form-group">
+					<label>Telefono Cliente:</label> <input type="text" name="telefonoCliente"
+						class="form-control" value="${clienteEditar.telefonoCliente}" />
+				</div>
+				
+				</div>
+				<br>
+				<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="submit" class="btn btn-primary" formmethod="post" >Crear Cliente</button>
+				<a type="button" class="btn btn-secondary" href= "/cliente" >Consultar Cliente</a>
+		 		</div>
+				
+				
+			</form>
+					
+		</div>
+		<br> 
+		<br>	
+		<div style="color: red">${mensaje}</div>			
+		
+    <table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Cedula Cliente</th>
+					<th>Direccion Cliente</th>
+					<th>Email Cliente</th>
+					<th>Nombre Cliente</th>
+					<th>Telefono Cliente</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${clientes}" var="cliente">
+					<tr style=" color: #FFF35F"> 
+						<td>${cliente.id}</td>
+						<td>${cliente.cedulaCliente}</td>
+						<td>${cliente.direccionCliente}</td>
+						<td>${cliente.emailCliente}</td>
+						<td>${cliente.nombreCliente}</td>
+						<td>${cliente.telefonoCliente}</td>
+						<td><a class="btn btn-danger"
+							href="/eliminarcliente/${cliente.cedulaCliente}">Eliminar Cliente</a></td>
+						<td><a class="btn btn-success" href="/cliente/${cliente.cedulaCliente}">Actualizar</a></td>
+						</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 	
 </body>
 </html>

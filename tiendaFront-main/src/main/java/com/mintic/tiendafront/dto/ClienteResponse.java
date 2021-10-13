@@ -1,8 +1,8 @@
 package com.mintic.tiendafront.dto;
 
-public class ClienteDto {
+public class ClienteResponse {
 	
-	private Long id;	
+private Long id;	
 	
 	private Long cedulaCliente;
 	
@@ -62,4 +62,5 @@ public class ClienteDto {
 	public void settelefonoCliente(String telefonoCliente) {
 		this.telefonoCliente = telefonoCliente;
 	}	
+
 }
