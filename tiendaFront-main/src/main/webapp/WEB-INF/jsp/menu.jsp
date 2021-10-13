@@ -27,6 +27,8 @@
 				<li class="nav-item"><a class="nav-link" href="/cliente"">Clientes</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/proveedores"">Proveedores</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/producto"">Productos</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
 

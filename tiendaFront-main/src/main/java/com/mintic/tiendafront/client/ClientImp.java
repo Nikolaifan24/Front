@@ -100,18 +100,16 @@ public class ClientImp implements IClientTienda {
 	}
 
 	@Override
-	public int borrarUsuario(Long cedulaUsuario) {
+	public void borrarUsuario(Long cedulaUsuario) {
 		try {
 
-			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuario/" + cedulaUsuario)
-					.retrieve().bodyToMono(Integer.class);
+			webClient.build().delete().uri(URL + "/usuario/" + cedulaUsuario)
+					.retrieve().bodyToMono(Void.class).block();
 
-			return response.block();
 
 		} catch (WebClientResponseException e) {
 			e.getMessage();
 			System.out.println("---->" + e.getMessage());
-			return 0;
 		}
 	}
 

@@ -17,7 +17,7 @@ public interface IClientTienda {
 
 	public UsuarioResponse buscarUsuario(Long cedulaUsuario);
 
-	public int borrarUsuario(Long cedulaUsuario);
+	public void borrarUsuario(Long cedulaUsuario);
 
 	
 }
