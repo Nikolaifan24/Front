@@ -3,7 +3,7 @@ package com.mintic.tiendafront.dto;
 import com.opencsv.bean.CsvBindByName;
 
 
-public class Producto {
+public class ProductoDto {
 	
 	@CsvBindByName(column = "id")
 	private Long id;
@@ -26,11 +26,11 @@ public class Producto {
 	@CsvBindByName(column = "precioVenta")
 	private Double precioVenta;
 
-	public Producto() {
+	public ProductoDto() {
 		
 	}
 
-	public Producto(Long id, Long codigoProducto, Double ivacompra, Long idProveedor, String nombreProducto,
+	public ProductoDto(Long id, Long codigoProducto, Double ivacompra, Long idProveedor, String nombreProducto,
 			Double precioCompra, Double precioVenta) {
 		super();
 		this.id = id;

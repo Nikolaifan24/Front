@@ -1,17 +1,21 @@
 package com.mintic.tiendafront.client;
 
+import java.util.List;
+
+import com.mintic.tiendafront.dto.ProductoDto;
+
 //import java.util.List;
 
 
 
 public interface IProducto {
 	
-	/*public List<ProdcutoDto> getProductos();
+	public List<ProductoDto> getProductos();
 
-	public UsuarioResponse nuevoUsuario(Usuario usuarioDto);
+	public void crearProducto(List<ProductoDto> listProductos);
 
-	public UsuarioResponse buscarUsuario(Long cedulaUsuario);
+	//public ProductoDto buscarProducto(Long codigoProducto);
 
-	public int borrarUsuario(Long cedulaUsuario);*/
+	//public int borrarProdcuto(Long codigoProducto);
 
 }

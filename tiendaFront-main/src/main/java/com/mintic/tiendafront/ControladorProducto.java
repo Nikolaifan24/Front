@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mintic.tiendafront.client.IClientTienda;
-import com.mintic.tiendafront.dto.Producto;
+import com.mintic.tiendafront.client.IProducto;
+import com.mintic.tiendafront.dto.ProductoDto;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -22,9 +23,8 @@ import com.opencsv.bean.CsvToBeanBuilder;
 @Controller
 public class ControladorProducto {
 	
-	
 	@Autowired
-	IClientTienda clienteTienda;
+	IProducto iProducto;
 	
 	@GetMapping("/producto")
 	public String a() {
@@ -41,10 +41,10 @@ public class ControladorProducto {
 
 			try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 
-				CsvToBean<Producto> csvToBean = new CsvToBeanBuilder(reader).withType(Producto.class)
+				CsvToBean<ProductoDto> csvToBean = new CsvToBeanBuilder(reader).withType(ProductoDto.class)
 						.withIgnoreLeadingWhiteSpace(true).build();
 
-				List<Producto> producto = csvToBean.parse();
+				List<ProductoDto> producto = csvToBean.parse();
 
 				for (int i = 0; i < producto.size(); i++) {
 
@@ -53,14 +53,19 @@ public class ControladorProducto {
 
 				model.addAttribute("producto", producto);
 				model.addAttribute("status", true);
+				
+				iProducto.crearProducto(producto);
 
 			} catch (Exception ex) {
 				model.addAttribute("message", "An error occurred while processing the CSV file.");
 				model.addAttribute("status", false);
 			}
 		}
+		
 
 		return ("producto");
 	}
+	
+	
 	
 }
