@@ -36,7 +36,9 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/proveedores">Proveedores</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="/producto">Ventas</a></li>
+				<li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
+				
+				<li class="nav-item"><a class="nav-link" href="/venta">Ventas</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
 			</ul>
@@ -70,8 +72,8 @@
 				<tr>
 					<th>id</th>
 					<th>codigoProducto</th>
-					<th>id proveedor</th>
 					<th>iva compra</th>
+					<th>id proveedor</th>
 					<th>nombre producto</th>
 					<th>precio compra</th>
 					<th>precio venta</th>
@@ -83,8 +85,8 @@
 					<tr>
 						<td>${producto.id}</td>
 						<td>${producto.codigoProducto}</td>
+						<td>${producto.ivaCompra}</td>
 						<td>${producto.idProveedor}</td>
-						<td>${producto.ivacompra}</td>
 						<td>${producto.nombreProducto}</td>
 						<td>${producto.precioCompra}</td>
 						<td>${producto.precioVenta}</td>

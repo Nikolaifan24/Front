@@ -12,7 +12,9 @@ public interface IProducto {
 	
 	public List<ProductoDto> getProductos();
 
-	public void crearProducto(List<ProductoDto> listProductos);
+	public void crearProducto(ProductoDto producto);
+
+	public ProductoDto buscarProductoPorCodigo(Long codigoProducto);
 
 	//public ProductoDto buscarProducto(Long codigoProducto);
 

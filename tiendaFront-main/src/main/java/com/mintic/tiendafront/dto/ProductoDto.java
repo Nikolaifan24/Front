@@ -11,8 +11,8 @@ public class ProductoDto {
 	@CsvBindByName(column = "codigoProducto")
 	private Long codigoProducto;
 	
-	@CsvBindByName(column = "ivacompra")
-	private Double ivacompra;
+	@CsvBindByName(column = "ivaCompra")
+	private Double ivaCompra;
 
 	@CsvBindByName(column = "idProveedor")
 	private Long idProveedor;
@@ -30,12 +30,11 @@ public class ProductoDto {
 		
 	}
 
-	public ProductoDto(Long id, Long codigoProducto, Double ivacompra, Long idProveedor, String nombreProducto,
+	public ProductoDto(Long id, Long codigoProducto, Double ivaCompra, Long idProveedor, String nombreProducto,
 			Double precioCompra, Double precioVenta) {
-		super();
 		this.id = id;
 		this.codigoProducto = codigoProducto;
-		this.ivacompra = ivacompra;
+		this.ivaCompra = ivaCompra;
 		this.idProveedor = idProveedor;
 		this.nombreProducto = nombreProducto;
 		this.precioCompra = precioCompra;
@@ -58,12 +57,12 @@ public class ProductoDto {
 		this.codigoProducto = codigoProducto;
 	}
 
-	public Double getIvacompra() {
-		return ivacompra;
+	public Double getIvaCompra() {
+		return ivaCompra;
 	}
 
-	public void setIvacompra(Double ivacompra) {
-		this.ivacompra = ivacompra;
+	public void setIvaCompra(Double ivaCompra) {
+		this.ivaCompra = ivaCompra;
 	}
 
 	public Long getIdProveedor() {
