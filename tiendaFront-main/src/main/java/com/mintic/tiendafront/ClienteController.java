@@ -34,9 +34,9 @@ public class ClienteController {
 	@PostMapping("/cliente")
 	public String crearCliente(Model model, ClienteDto cliente) 
 	{
-		Validacion(model, cliente);
+		ValidacionCrearCliente(model, cliente);
 		
-		if(Validacion(model, cliente) == true) 
+		if(ValidacionCrearCliente(model, cliente) == true) 
 		{
 			icliente.nuevocliente(cliente);				
 			model.addAttribute("clientes", icliente.getClientes());
@@ -50,8 +50,8 @@ public class ClienteController {
 	public String actualizarCliente(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente)
 	{
 		ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
-		Validacion(model, clienteEditar);
-		if(Validacion(model, clienteEditar) == true)
+		ValidacionActualizarCliente(model, clienteEditar);
+		if(ValidacionActualizarCliente(model, clienteEditar) == true)
 		{			
 			model.addAttribute("clienteEditar", clienteEditar);
 			model.addAttribute("clientes", icliente.getClientes());
@@ -71,7 +71,31 @@ public class ClienteController {
 		return "cliente";
 	}
 	
-	private boolean Validacion(Model model, ClienteDto cliente) 
+	@GetMapping("/BuscarClientePorCedula/{cedulaCliente}")
+	public String BuscarClientePorCedula(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente)
+	{		
+		
+		if(ValidacionPorCedula(model, cedulaCliente))
+		{	
+			model.addAttribute("clientes", icliente.buscarCliente(cedulaCliente));
+			model.addAttribute("mensaje", "Cliente Inexistente");
+		}
+
+		return "cliente";
+	}
+	
+	private boolean ValidacionPorCedula(Model model, Long cedulaCliente) 
+	{		
+		if(cedulaCliente == 0) 
+		{
+			model.addAttribute("mensaje", "Ingrese numero de Cliente para la busqueda");
+			return false;
+		}		
+		
+		return true;
+	}
+	
+	private boolean ValidacionCrearCliente(Model model, ClienteDto cliente) 
 	{		
 		if(cliente.getcedulaCliente().longValue() == 0) 
 		{
@@ -102,7 +126,7 @@ public class ClienteController {
 		return true;
 	}
 	
-	private boolean Validacion(Model model, ClienteResponse clienteEditar)
+	private boolean ValidacionActualizarCliente(Model model, ClienteResponse clienteEditar)
 	{
 		
 		if(clienteEditar.getcedulaCliente().longValue() == 0) 

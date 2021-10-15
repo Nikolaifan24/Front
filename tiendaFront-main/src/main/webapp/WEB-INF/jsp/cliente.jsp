@@ -84,7 +84,7 @@
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="submit" class="btn btn-primary" formmethod="post" >Crear Cliente</button>
-				<a type="button" class="btn btn-secondary" href= "/cliente" >Consultar Cliente</a>
+				<a type="button" class="btn btn-secondary" href= "/BuscarClientePorCedula/${clienteEditar.cedulaCliente}" >Consultar Cliente</a>
 		 		</div>
 				
 				
