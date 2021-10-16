@@ -48,52 +48,44 @@
 	<div class="container overflow-hidden">
 
 		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
-			<form method="post" action="/producto">		
-
+			<form method="post" action="/venta">
+					
 				<div class="container overflow-hidden">
-				<div class="form-group">
-					<input type="hidden" name="id" value="${producto.id}">
-
-					<label for="codigo"> codigo:</label><input type="text"
-						name="codigoProducto" id="codigo"
-						value="${producto.codigoProducto}" class="form-control" />
+					<div class="form-group">
+						<label for="codigoProducto1"> codigo producto 1:</label>
+						<input type="text"
+							name="codigoProducto1" id="codigoProducto1"
+							value="${producto.codigoProducto1}" class="form-control" />
+						<label for="cantidadProducto1"> cantidad producto 1:</label>
+						<input type="text"
+							name="cantidadProducto1" id="cantidadProducto1"
+							value="" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="codigoProducto2"> codigo producto 2:</label>
+						<input type="text"
+							name="codigoProducto2" id="codigoProducto2"
+							value="${producto.codigoProducto2}" class="form-control" />
+						<label for="cantidadProducto2"> cantidad producto 2:</label>
+						<input type="text"
+							name="cantidadProducto2" id="cantidadProducto2"
+							value="" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="codigoProducto3"> codigo producto 3:</label>
+						<input type="text"
+							name="codigoProducto3" id="codigoProducto3"
+							value="${producto.codigoProducto3}" class="form-control" />
+						<label for="cantidadProducto3"> cantidad producto 3:</label>
+						<input type="text"
+							name="cantidadProducto3" id="cantidadProducto3"
+							value="" class="form-control" />
+					</div>
+					
+					<button type="submit" class="btn btn-secondary" href="/venta">Consultar</button>
+					
 				</div>
 				
-				<div class="form-group">
-					<label>iva compra:</label> <input type="text" name="ivaCompra" 
-					class="form-control"
-						value="${producto.ivaCompra}" />
-				</div>
-				
-				<div class="form-group">
-					<label>id Proveedor:</label><input type="text" name="idProveedor"
-						class="form-control" value="${producto.idProveedor}" />
-				</div>
-				
-				<div class="form-group">
-					<label>nombre producto</label><input type="text" name="nombreProducto"
-						class="form-control" value="${producto.nombreProducto}" />
-				</div>			
-				
-				
-				<div class="form-group">
-					<label>precio compra</label> <input type="text" name="precioCompra"
-						class="form-control" value="${producto.precioCompra}" />
-				</div>
-				
-				<div class="form-group">
-					<label>precio venta</label> <input type="text" name="precioVenta"
-						class="form-control" value="${producto.precioVenta}" />
-				</div>
-				
-				
-				
-				</div>
-				<br>
-				<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="submit" class="btn btn-primary" formmethod="post" >Crear Cliente</button>
-				<a type="button" class="btn btn-secondary" href= "/producto" >Consultar Producto</a>
-		 		</div>
 				
 				
 			</form>
@@ -106,30 +98,50 @@
     <table class="table">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>codigo producto</th>
-					<th>iva compra</th>
-					<th>id proveedor</th>
+					
+					<th>codigo</th>
+					<th>cantidad</th>
 					<th>nombre producto</th>
-					<th>precio compra</th>
-					<th>precio venta</th>
+					<th>iva compra</th>
+					<th>valor total</th>
+					
 					
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${producto}" var="producto">
-					<tr style=" color: #FFF35F"> 
-						<td>${producto.id}</td>
-						<td>${producto.codigoProducto}</td>
-						<td>${producto.ivaCompra}</td>
-						<td>${producto.idProveedor}</td>
-						<td>${producto.nombreProducto}</td>
-						<td>${producto.precioCompra}</td>
-						<td>${producto.precioVenta}</td>
-						
-				</c:forEach>
+				
+				<tr style=" color: black"> 
+					
+					<td>${totalVenta.codigoProducto1}</td>
+					<td>${totalVenta.cantidadProducto1}</td>
+					<td>${totalVenta.nombreProducto1}</td>
+					<td>${totalVenta.ivaProducto1}</td>
+					<td>${totalVenta.precioProducto1}</td>
+				</tr>
+				
+				<tr style=" color: black"> 
+					
+					<td>${totalVenta.codigoProducto2}</td>
+					<td>${totalVenta.cantidadProducto2}</td>
+					<td>${totalVenta.nombreProducto2}</td>
+					<td>${totalVenta.ivaProducto2}</td>
+					<td>${totalVenta.precioProducto2}</td>
+				</tr>
+				
+				<tr style=" color: black"> 
+					
+					<td>${totalVenta.codigoProducto3}</td>
+					<td>${totalVenta.cantidadProducto3}</td>
+					<td>${totalVenta.nombreProducto3}</td>
+					<td>${totalVenta.ivaProducto3}</td>
+					<td>${totalVenta.precioProducto3}</td>
+				</tr>
 			</tbody>
 		</table>
+		
+		<div>Total Venta Sin Iva: ${totalVenta.precioTotalSinIva}</div>
+		<div>Iva Total: ${totalVenta.ivaTotal}</div>
+		<div>Total con Iva: ${totalVenta.precioTotal}</div>
 	</div>
 	
 </body>
