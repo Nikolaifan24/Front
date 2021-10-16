@@ -12,6 +12,7 @@ import com.mintic.tiendafront.client.IProveedor;
 import com.mintic.tiendafront.dto.Proveedor;
 import com.mintic.tiendafront.dto.ProveedorResponse;
 
+
 @Controller
 public class ProveedorController {
 	
@@ -35,42 +36,88 @@ public class ProveedorController {
 	@PostMapping("/proveedor")
 	public String crearProveedor(Model model, Proveedor proveedor) {
 
-		Validacion(model, proveedor);
-		
-		if(Validacion(model, proveedor) == true) 
-		{
-			proveedores.nuevoProveedor(proveedor);				
+		if(proveedor.getid().longValue() == 0 ) {
+			
+			Validacion(model, proveedor);
+			
+			if(Validacion(model, proveedor) == true) 
+			{
+				proveedores.nuevoProveedor(proveedor);				
+				model.addAttribute("proveedores", proveedores.getProveedores());
+				model.addAttribute("mensaje", "Proveedor Creado");			
+			}	
+			
+		}
+		else {
+			proveedores.ActualizarProveedor(proveedor, proveedor.getNit().longValue());		
 			model.addAttribute("proveedores", proveedores.getProveedores());
-			model.addAttribute("mensaje", "Proveedor Creado");			
+			model.addAttribute("mensaje", "Datos del proveedor Actualizados");		
 		}	
-
+		
 		return "proveedor";
 	}
 
 	@GetMapping("/proveedor/{nit}")
 	public String actualizarProveedor(Model model, @PathVariable(name = "nit") Long nit) 
 	{
-		ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
-		Validacion(model, proveedorEditar);
-		if(Validacion(model, proveedorEditar) == true)
-		{			
-			model.addAttribute("proveedorEditar", proveedorEditar);			
-			model.addAttribute("proveedores", proveedores.getProveedores());
-			model.addAttribute("mensaje", "Datos del proveedor Actualizados");
+		if (nit > 0) {
+			ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
+			model.addAttribute("proveedorEditar", proveedorEditar);		
 		}
+		
+		//Validacion(model, proveedorEditar);
+		//if(Validacion(model, proveedorEditar) == true)
+		//{			
+				
+			//model.addAttribute("proveedores", proveedores.getProveedores());
+			//model.addAttribute("mensaje", "Datos del proveedor Actualizados");
+		//}
 		
 
 		return "proveedor";
 	}
 
-		@GetMapping("/eliminarproveedor/{nit}")
-	public String eliminarProveedor(Model model, @PathVariable(name = "nit") Long nit) {
+	@GetMapping("/eliminarproveedor/{nit}")
+	
+	public String eliminarProveedor(Model model, @PathVariable("nit") long nit) {
 
+		ValidacionPorNit(model, nit);
 		proveedores.borrarProveedor(nit);
 		model.addAttribute("proveedores", proveedores.getProveedores());
 		model.addAttribute("mensaje", "Datos del proveedor Eliminados");
 			
 		return "proveedor";
+	}
+		
+	@GetMapping("/proveedorPorNit/{nit}")
+	public String BuscarProveedorPorNit(Model model, @PathVariable(name = "nit") Long nit)
+	{		
+		
+		if(ValidacionPorNit(model, nit))
+		{	
+			ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
+			if(proveedorEditar == null) 
+			{
+				model.addAttribute("mensaje", "Proveedor Inexistente");
+			}
+			else {
+				
+				model.addAttribute("proveedorEditar", proveedorEditar);
+			}	
+		}
+
+		return "proveedor";
+	}
+		
+	private boolean ValidacionPorNit(Model model, Long Nit) 
+	{		
+		if(Nit == 0 || Nit == null) 
+		{
+			model.addAttribute("mensaje", "Ingrese numero de Proveedor para la busqueda");
+			return false;
+		}		
+		
+		return true;
 	}
 	
 	private boolean Validacion(Model model, Proveedor proveedor) 

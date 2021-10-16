@@ -32,7 +32,7 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/proveedores">Proveedores</a></li>
+				<li class="nav-item"><a class="nav-link" href="/proveedor">Proveedores</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
 
@@ -83,8 +83,9 @@
 				</div>
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="submit" class="btn btn-primary" formmethod="post" >Crear Cliente</button>
-				<a type="button" class="btn btn-secondary" href= "/cliente" >Consultar Cliente</a>
+				<button type="submit" class="btn btn-primary" formmethod="post" >Grabar</button>
+				<!-- <a type="button" class="btn btn-secondary" href= "/BuscarClientePorCedula/${clienteEditar.cedulaCliente}" >Consultar Cliente</a>-->
+				<a type="button" class="btn btn-secondary" onclick="getInputValue();" >Consultar Cliente</a>
 		 		</div>
 				
 				
@@ -116,14 +117,25 @@
 						<td>${cliente.emailCliente}</td>
 						<td>${cliente.nombreCliente}</td>
 						<td>${cliente.telefonoCliente}</td>
-						<td><a class="btn btn-danger"
-							href="/eliminarcliente/${cliente.cedulaCliente}">Eliminar Cliente</a></td>
-						<td><a class="btn btn-success" href="/cliente/${cliente.cedulaCliente}">Actualizar</a></td>
+						<td><a class="btn btn-danger" href="/eliminarcliente/${cliente.cedulaCliente}">Eliminar Cliente</a></td>
+						<td><a class="btn btn-success" href="/cliente/${cliente.cedulaCliente}">Actualizar Cliente</a></td>
 						</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	
+	<script>
+
+function getInputValue(){
+    
+    var inputVal = document.getElementById("numero").value;
+    var url = "/BuscarClientePorCedula/" + inputVal;
+    let res = fetch(url);
+        
+}
+
+
+</script>
 </body>
 </html>

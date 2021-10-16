@@ -1,5 +1,6 @@
 package com.mintic.tiendafront.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 
 import com.mintic.tiendafront.dto.ClienteDto;
 import com.mintic.tiendafront.dto.ClienteResponse;
+import com.mintic.tiendafront.dto.ProveedorResponse;
 
 import reactor.core.publisher.Mono;
 
@@ -57,11 +59,31 @@ public class ClienteServicio implements ICliente {
 	}
 
 	@Override
-	public ClienteResponse buscarCliente(Long cedulaCliente) {
+	public ClienteResponse ActualizarCliente(ClienteDto clienteDto, Long id) {
 		
 		try {
+			
+			ClienteResponse u = null;
+			Mono<ClienteResponse> response = webClient.build().post().uri(URL + "/cliente" + id )
+					.body(Mono.just(clienteDto), ClienteResponse.class).retrieve().bodyToMono(ClienteResponse.class);
+				
+			
+			u = response.block();
+			return u;
 
-			Mono<ClienteResponse> response = webClient.build().get().uri(URL + "/cliente/" + cedulaCliente)
+		} catch (WebClientResponseException e) {
+			e.getMessage();
+			System.out.println("---->" + e.getMessage());
+			return null;
+		}
+	}
+	
+	@Override
+	public ClienteResponse buscarCliente(Long cedulaCliente) {
+				
+		try {
+
+			Mono<ClienteResponse> response = webClient.build().get().uri(URL + "/proveedor/" + cedulaCliente)
 					.retrieve().bodyToMono(ClienteResponse.class);
 
 			return response.block();
@@ -87,4 +109,6 @@ public class ClienteServicio implements ICliente {
 			return 0;
 		}
 	}
+
+	
 }

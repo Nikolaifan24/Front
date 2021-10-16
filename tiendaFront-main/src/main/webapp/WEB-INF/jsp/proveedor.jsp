@@ -32,7 +32,7 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="/proveedores">Proveedores</a></li>
+				<li class="nav-item"><a class="nav-link" href="/proveedor">Proveedores</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
 
@@ -77,14 +77,11 @@
 				</div>
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="submit" class="btn btn-primary" formmethod="post" >Crear proveedor</button>
-				<a type="button" class="btn btn-secondary" href= "/proveedor" >Consultar proveedor</a>
+				<button type="submit" class="btn btn-primary" formmethod="post" >Grabar</button>
+				<!-- <a type="button" class="btn btn-secondary" href= "/proveedorPorNit/${proveedorEditar.nit}" >Consultar proveedor</a>-->
+				<a type="button" class="btn btn-secondary" onclick="getInputValue();" >Consultar Proveedor</a>
 		 		</div>
-				
-				
 			</form>
-			
-					
 		</div>
 		<br> 
 		<br>	
@@ -108,8 +105,7 @@
 						<td>${proveedor.ciudad}</td>
 						<td>${proveedor.direccion}</td>
 						<td>${proveedor.telefono}</td>
-						<td><a class="btn btn-danger"
-							href="/eliminarproveedor/${proveedor.nit}">Eliminar proveedor</a></td>
+						<td><a class="btn btn-danger" href="/eliminarproveedor/${proveedor.nit}">Eliminar proveedor</a></td>
 						<td><a class="btn btn-success" href="/proveedor/${proveedor.nit}">Actualizar proveedor</a></td>
 						</tr>
 				</c:forEach>
@@ -118,4 +114,18 @@
 	</div>
 
 </body>
+
+
+<script>
+
+function getInputValue(){
+    
+    var inputVal = document.getElementById("nit").value;
+    var url = "/proveedorPorNit/" + inputVal;
+    let res = fetch(url);
+        
+}
+
+
+</script>
 </html>

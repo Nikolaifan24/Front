@@ -57,6 +57,28 @@ public class ProveedorServicio implements IProveedor {
 		}
 
 	}
+	
+	@Override
+	public ProveedorResponse ActualizarProveedor(Proveedor proveedorDto, Long nit) {
+			
+		
+		try {
+			
+			ProveedorResponse u = null;
+			Mono<ProveedorResponse> response = webClient.build().post().uri(URL + "/proveedor/" + nit)
+					.body(Mono.just(proveedorDto), ProveedorResponse.class).retrieve().bodyToMono(ProveedorResponse.class);
+				
+			
+			u = response.block();
+			return u;
+
+		} catch (WebClientResponseException e) {
+			e.getMessage();
+			System.out.println("---->" + e.getMessage());
+			return null;
+		}
+
+	}
 
 	@Override
 	public ProveedorResponse buscarProveedor(Long nit) {

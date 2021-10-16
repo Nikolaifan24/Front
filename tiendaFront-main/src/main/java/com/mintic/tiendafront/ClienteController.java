@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mintic.tiendafront.client.ICliente;
 import com.mintic.tiendafront.dto.ClienteDto;
 import com.mintic.tiendafront.dto.ClienteResponse;
+import com.mintic.tiendafront.dto.ProveedorResponse;
 
 @Controller
 public class ClienteController {
@@ -34,14 +35,22 @@ public class ClienteController {
 	@PostMapping("/cliente")
 	public String crearCliente(Model model, ClienteDto cliente) 
 	{
-		Validacion(model, cliente);
-		
-		if(Validacion(model, cliente) == true) 
-		{
-			icliente.nuevocliente(cliente);				
+		if(cliente.getid().longValue() == 0) {
+			ValidacionCrearCliente(model, cliente);
+			
+			if(ValidacionCrearCliente(model, cliente) == true) 
+			{
+				icliente.nuevocliente(cliente);				
+				model.addAttribute("clientes", icliente.getClientes());
+				model.addAttribute("mensaje", "Cliente Creado");			
+			}		
+		}else {
+			icliente.ActualizarCliente(cliente, cliente.getcedulaCliente().longValue());		
 			model.addAttribute("clientes", icliente.getClientes());
-			model.addAttribute("mensaje", "Cliente Creado");			
-		}		
+			model.addAttribute("mensaje", "Datos del Cliente Actualizados");		
+		}	
+		
+		
 
 		return "cliente";
 	}
@@ -49,21 +58,29 @@ public class ClienteController {
 	@GetMapping("/cliente/{cedulaCliente}")
 	public String actualizarCliente(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente)
 	{
-		ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
-		Validacion(model, clienteEditar);
-		if(Validacion(model, clienteEditar) == true)
-		{			
-			model.addAttribute("clienteEditar", clienteEditar);
-			model.addAttribute("clientes", icliente.getClientes());
-			model.addAttribute("mensaje", "Datos del Cliente Actualizados");
-		}
+		//ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
+		//ValidacionActualizarCliente(model, clienteEditar);
+		//if(ValidacionActualizarCliente(model, clienteEditar) == true)
+		//{			
+			//model.addAttribute("clienteEditar", clienteEditar);
+			//model.addAttribute("clientes", icliente.getClientes());
+			//model.addAttribute("mensaje", "");
+		//}
 
+		//return "cliente";
+		
+		if (cedulaCliente > 0) {
+			ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
+			model.addAttribute("clienteEditar", clienteEditar);
+		}
+		
 		return "cliente";
 	}
 
 	@GetMapping("/eliminarcliente/{cedulaCliente}")
 	public String eliminarCliente(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente) {
 
+		ValidacionPorCedula(model, cedulaCliente);
 		icliente.borrarCliente(cedulaCliente);
 		model.addAttribute("clientes", icliente.getClientes());
 		model.addAttribute("mensaje", "Datos del Cliente Eliminados");
@@ -71,7 +88,37 @@ public class ClienteController {
 		return "cliente";
 	}
 	
-	private boolean Validacion(Model model, ClienteDto cliente) 
+	@GetMapping("/BuscarClientePorCedula/{cedulaCliente}")
+	public String BuscarClientePorCedula(Model model, @PathVariable(name = "cedulaCliente") Long cedulaCliente)
+	{		
+		
+		if(ValidacionPorCedula(model, cedulaCliente))
+		{	
+			ClienteResponse clienteEditar = icliente.buscarCliente(cedulaCliente);
+			
+			if(clienteEditar == null) {
+				model.addAttribute("mensaje", "Cliente Inexistente");
+			}
+			else {
+				model.addAttribute("clienteEditar", clienteEditar);
+			}	
+		}
+
+		return "cliente";
+	}
+	
+	private boolean ValidacionPorCedula(Model model, Long cedulaCliente) 
+	{		
+		if(cedulaCliente == 0) 
+		{
+			model.addAttribute("mensaje", "Ingrese numero de Cliente para la busqueda");
+			return false;
+		}		
+		
+		return true;
+	}
+	
+	private boolean ValidacionCrearCliente(Model model, ClienteDto cliente) 
 	{		
 		if(cliente.getcedulaCliente().longValue() == 0) 
 		{
@@ -102,7 +149,7 @@ public class ClienteController {
 		return true;
 	}
 	
-	private boolean Validacion(Model model, ClienteResponse clienteEditar)
+	private boolean ValidacionActualizarCliente(Model model, ClienteResponse clienteEditar)
 	{
 		
 		if(clienteEditar.getcedulaCliente().longValue() == 0) 
