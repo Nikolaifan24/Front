@@ -12,6 +12,7 @@ import com.mintic.tiendafront.client.IProveedor;
 import com.mintic.tiendafront.dto.Proveedor;
 import com.mintic.tiendafront.dto.ProveedorResponse;
 
+
 @Controller
 public class ProveedorController {
 	
@@ -63,14 +64,45 @@ public class ProveedorController {
 		return "proveedor";
 	}
 
-		@GetMapping("/eliminarproveedor/{nit}")
-	public String eliminarProveedor(Model model, @PathVariable(name = "nit") Long nit) {
+	@GetMapping("/eliminarproveedor/{nit}")
+	
+	public String eliminarProveedor(Model model, @PathVariable("nit") long nit) {
 
 		proveedores.borrarProveedor(nit);
 		model.addAttribute("proveedores", proveedores.getProveedores());
 		model.addAttribute("mensaje", "Datos del proveedor Eliminados");
 			
 		return "proveedor";
+	}
+		
+	@GetMapping("/proveedorPorNit/{nit}")
+	public String BuscarProveedorPorNit(Model model, @PathVariable(name = "nit") Long nit)
+	{		
+		
+		if(ValidacionPorNit(model, nit))
+		{	
+			ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
+			if(proveedorEditar.getNit().longValue() > 0) 
+			{
+				model.addAttribute("proveedorEditar", proveedorEditar);
+			}
+			else {
+				model.addAttribute("mensaje", "Proveedor Inexistente");
+			}	
+		}
+
+		return "proveedor";
+	}
+		
+	private boolean ValidacionPorNit(Model model, Long Nit) 
+	{		
+		if(Nit == 0 || Nit == null) 
+		{
+			model.addAttribute("mensaje", "Ingrese numero de Proveedor para la busqueda");
+			return false;
+		}		
+		
+		return true;
 	}
 	
 	private boolean Validacion(Model model, Proveedor proveedor) 
