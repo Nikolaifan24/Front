@@ -28,4 +28,6 @@ public interface ICliente {
 
 	public int borrarCliente(Long cedulaCliente);
 
+	public ClienteResponse ActualizarCliente(ClienteDto cliente, Long id);
+
 }

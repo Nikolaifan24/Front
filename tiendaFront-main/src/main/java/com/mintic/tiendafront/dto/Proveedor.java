@@ -1,6 +1,9 @@
 package com.mintic.tiendafront.dto;
 
 public class Proveedor {
+	
+	private Long id;
+	
 	private Long nit;
 
 	private String nombre;
@@ -11,6 +14,14 @@ public class Proveedor {
 
 	private String telefono;
 
+	public Long getid() {
+		return id;
+	}
+
+	public void setid(Long id) {
+		this.id = id;
+	}
+	
 	public Long getNit() {
 		return nit;
 	}

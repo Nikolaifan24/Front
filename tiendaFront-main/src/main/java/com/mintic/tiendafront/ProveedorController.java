@@ -36,29 +36,42 @@ public class ProveedorController {
 	@PostMapping("/proveedor")
 	public String crearProveedor(Model model, Proveedor proveedor) {
 
-		Validacion(model, proveedor);
-		
-		if(Validacion(model, proveedor) == true) 
-		{
-			proveedores.nuevoProveedor(proveedor);				
+		if(proveedor.getid().longValue() == 0 ) {
+			
+			Validacion(model, proveedor);
+			
+			if(Validacion(model, proveedor) == true) 
+			{
+				proveedores.nuevoProveedor(proveedor);				
+				model.addAttribute("proveedores", proveedores.getProveedores());
+				model.addAttribute("mensaje", "Proveedor Creado");			
+			}	
+			
+		}
+		else {
+			proveedores.ActualizarProveedor(proveedor, proveedor.getNit().longValue());		
 			model.addAttribute("proveedores", proveedores.getProveedores());
-			model.addAttribute("mensaje", "Proveedor Creado");			
+			model.addAttribute("mensaje", "Datos del proveedor Actualizados");		
 		}	
-
+		
 		return "proveedor";
 	}
 
 	@GetMapping("/proveedor/{nit}")
 	public String actualizarProveedor(Model model, @PathVariable(name = "nit") Long nit) 
 	{
-		ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
-		Validacion(model, proveedorEditar);
-		if(Validacion(model, proveedorEditar) == true)
-		{			
-			model.addAttribute("proveedorEditar", proveedorEditar);			
-			model.addAttribute("proveedores", proveedores.getProveedores());
-			model.addAttribute("mensaje", "Datos del proveedor Actualizados");
+		if (nit > 0) {
+			ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
+			model.addAttribute("proveedorEditar", proveedorEditar);		
 		}
+		
+		//Validacion(model, proveedorEditar);
+		//if(Validacion(model, proveedorEditar) == true)
+		//{			
+				
+			//model.addAttribute("proveedores", proveedores.getProveedores());
+			//model.addAttribute("mensaje", "Datos del proveedor Actualizados");
+		//}
 		
 
 		return "proveedor";
@@ -68,6 +81,7 @@ public class ProveedorController {
 	
 	public String eliminarProveedor(Model model, @PathVariable("nit") long nit) {
 
+		ValidacionPorNit(model, nit);
 		proveedores.borrarProveedor(nit);
 		model.addAttribute("proveedores", proveedores.getProveedores());
 		model.addAttribute("mensaje", "Datos del proveedor Eliminados");
@@ -82,12 +96,13 @@ public class ProveedorController {
 		if(ValidacionPorNit(model, nit))
 		{	
 			ProveedorResponse proveedorEditar = proveedores.buscarProveedor(nit);
-			if(proveedorEditar.getNit().longValue() > 0) 
+			if(proveedorEditar == null) 
 			{
-				model.addAttribute("proveedorEditar", proveedorEditar);
+				model.addAttribute("mensaje", "Proveedor Inexistente");
 			}
 			else {
-				model.addAttribute("mensaje", "Proveedor Inexistente");
+				
+				model.addAttribute("proveedorEditar", proveedorEditar);
 			}	
 		}
 

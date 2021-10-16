@@ -77,9 +77,9 @@
 				</div>
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="submit" class="btn btn-primary" formmethod="post" >Crear proveedor</button>
-				<a type="button" class="btn btn-secondary" href= "/proveedorPorNit/${proveedorEditar.nit}" >Consultar proveedor</a>
-				<a type="button" class="btn btn-danger" onclick="getInputValue();" >Consultar Proveedor</a>
+				<button type="submit" class="btn btn-primary" formmethod="post" >Grabar</button>
+				<!-- <a type="button" class="btn btn-secondary" href= "/proveedorPorNit/${proveedorEditar.nit}" >Consultar proveedor</a>-->
+				<a type="button" class="btn btn-secondary" onclick="getInputValue();" >Consultar Proveedor</a>
 		 		</div>
 			</form>
 		</div>
