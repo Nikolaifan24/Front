@@ -85,10 +85,8 @@
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="submit" class="btn btn-primary" formmethod="post" >Grabar</button>
-				<button type="submit" class="btn btn-primary" onclick="relocate_buscar()" >Buscar</button>
+				<button type="button" class="btn btn-primary" onclick="relocate_buscar()" >Buscar</button>
 				
-				<!-- <a type="button" class="btn btn-secondary" href= "/BuscarClientePorCedula/${clienteEditar.cedulaCliente}" >Consultar Cliente</a>-->
-				<a type="button" class="btn btn-secondary" onclick="getInputValue()" >Consultar Cliente</a>
 		 		</div>
 				
 				
@@ -132,7 +130,7 @@
 
 function getInputValue(){
     
-    var inputVal = document.getElementById("numero").value;
+    var inputVal = document.forms[0].value;
     var url = "/BuscarClientePorCedula/" + inputVal;
     
     let res = fetch(url);
@@ -141,7 +139,8 @@ function getInputValue(){
 function relocate_buscar()
 {
 	var inputVal = document.getElementById("numero").value;
-    location.href = "/BuscarClientePorCedula" + inputVal;
+    location.href = "/BuscarClientePorCedula/" + inputVal; 
+    console.log(inputValue);
 } 
 
 
