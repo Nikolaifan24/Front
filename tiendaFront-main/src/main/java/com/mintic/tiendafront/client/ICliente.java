@@ -25,6 +25,7 @@ public interface ICliente {
 	public ClienteResponse nuevocliente(ClienteDto clienteDto);
 
 	public ClienteResponse buscarCliente(Long cedulacliente);
+	
 
 	public int borrarCliente(Long cedulaCliente);
 

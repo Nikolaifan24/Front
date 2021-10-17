@@ -37,7 +37,7 @@
 
 				<li class="nav-item"><a class="nav-link" href="/venta">Ventas</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
+				<li class="nav-item"><a class="nav-link" href="/reporte">Reportes</a></li>
 			</ul>
 
 		</div>

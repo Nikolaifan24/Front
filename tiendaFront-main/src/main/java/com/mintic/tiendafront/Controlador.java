@@ -83,6 +83,26 @@ public class Controlador {
 		return "usuario";
 	}
 	
+	/*
+	@GetMapping("/reporte")
+	public String reportes() {
+		return "reporte";
+	}
+	*/
+	
+	
+	@GetMapping("/reporteUsuario")
+	public String reportesUsuario(Model model) {
+		model.addAttribute("usuarios", clienteTienda.getUsuarios());
+		
+		if(model.getAttribute("usuarios") == null) 
+		{
+			model.addAttribute("mensaje", "No hay datos para mostrar");
+		}	
+		
+		return "reporteUsuario";
+	}
+	
 	
 	
 	

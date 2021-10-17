@@ -24,6 +24,7 @@ import com.mintic.tiendafront.dto.ProductoDto;
 import com.mintic.tiendafront.dto.ProductoVenta;
 import com.mintic.tiendafront.dto.UsuarioResponse;
 import com.mintic.tiendafront.dto.VentaDto;
+import com.mintic.tiendafront.dto.VentaResponse;
 
 @Controller
 public class ControladorVentas {
@@ -65,7 +66,18 @@ public class ControladorVentas {
 		return "venta";
 	}
 	
-	
+	@GetMapping("/reporteVenta")
+	public String reporteVenta(Model model) {
+		List<VentaResponse> ventaResponse = iVenta.getVentas();
+		model.addAttribute("ventas", ventaResponse);
+		
+		if(model.getAttribute("ventas") == null) 
+		{
+			model.addAttribute("mensaje", "No hay datos para mostrar");
+		}	
+		
+		return "reporteVenta";
+	}
 	
 	
 	

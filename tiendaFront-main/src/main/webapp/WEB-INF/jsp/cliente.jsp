@@ -53,39 +53,42 @@
 				<div class="form-group">
 					<input type="hidden" name="id" value="${clienteEditar.id}">
 
-					<label for="numero"> numero:</label><input type="text"
+					<label for="numero"> numero:</label>
+					<input type="text"
 						name="cedulaCliente" id="numero"
-						value="${clienteEditar.cedulaCliente}" class="form-control" />
+						value="${clienteEditar.cedulaCliente}" class="form-control"/>
 				</div>
 				
 				<div class="form-group">
 					<label>Direccion Cliente:</label> <input type="text" name="direccionCliente" 
 					class="form-control"
-						value="${clienteEditar.direccionCliente}" />
+						value="${clienteEditar.direccionCliente}" disabled="disabled"/>
 				</div>
 				
 				<div class="form-group">
 					<label>Nombre Cliente:</label><input type="text" name="nombreCliente"
-						class="form-control" value="${clienteEditar.nombreCliente}" />
+						class="form-control" value="${clienteEditar.nombreCliente}" disabled="disabled" />
 				</div>
 				
 				<div class="form-group">
 					<label>Email:</label><input type="text" name="emailCliente"
-						class="form-control" value="${clienteEditar.emailCliente}" />
+						class="form-control" value="${clienteEditar.emailCliente}" disabled="disabled"/>
 				</div>			
 				
 				
 				<div class="form-group">
 					<label>Telefono Cliente:</label> <input type="text" name="telefonoCliente"
-						class="form-control" value="${clienteEditar.telefonoCliente}" />
+						class="form-control" value="${clienteEditar.telefonoCliente}" disabled="disabled"/>
 				</div>
 				
 				</div>
 				<br>
 				<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="submit" class="btn btn-primary" formmethod="post" >Grabar</button>
+				<button type="submit" class="btn btn-primary" onclick="relocate_buscar()" >Buscar</button>
+				
 				<!-- <a type="button" class="btn btn-secondary" href= "/BuscarClientePorCedula/${clienteEditar.cedulaCliente}" >Consultar Cliente</a>-->
-				<a type="button" class="btn btn-secondary" onclick="getInputValue();" >Consultar Cliente</a>
+				<a type="button" class="btn btn-secondary" onclick="getInputValue()" >Consultar Cliente</a>
 		 		</div>
 				
 				
@@ -110,7 +113,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${clientes}" var="cliente">
-					<tr style=" color: #FFF35F"> 
+					<tr> 
 						<td>${cliente.id}</td>
 						<td>${cliente.cedulaCliente}</td>
 						<td>${cliente.direccionCliente}</td>
@@ -131,9 +134,15 @@ function getInputValue(){
     
     var inputVal = document.getElementById("numero").value;
     var url = "/BuscarClientePorCedula/" + inputVal;
+    
     let res = fetch(url);
         
 }
+function relocate_buscar()
+{
+	var inputVal = document.getElementById("numero").value;
+    location.href = "/BuscarClientePorCedula" + inputVal;
+} 
 
 
 </script>

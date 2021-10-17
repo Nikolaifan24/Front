@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import com.mintic.tiendafront.dto.ClienteDto;
 import com.mintic.tiendafront.dto.ProductoDto;
 import com.mintic.tiendafront.dto.VentaDto;
+import com.mintic.tiendafront.dto.VentaResponse;
 
 import reactor.core.publisher.Mono;
 
@@ -24,6 +25,9 @@ public class VentaImp implements IVenta {
 	
 	@Autowired
 	private WebClient.Builder webClient;
+	
+	@Autowired
+	IVenta iVenta;
 
 	@Override
 	public ProductoDto getProduct (Long codigoProducto) {
@@ -95,6 +99,19 @@ public class VentaImp implements IVenta {
 			totalSinIva += producto.getKey().getPrecioCompra();
 		}
 		return totalSinIva;
+	}
+
+	@Override
+	public List<VentaResponse> getVentas() {
+		try {
+			Mono<List> response = webClient.build().get().uri(URL + "/ventas").retrieve()
+					.bodyToMono(List.class);
+
+			return response.block();
+		} catch (Exception e) {
+
+			return null;
+		}
 	}
 	
 

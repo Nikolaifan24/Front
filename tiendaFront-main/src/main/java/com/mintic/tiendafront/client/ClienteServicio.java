@@ -83,7 +83,7 @@ public class ClienteServicio implements ICliente {
 				
 		try {
 
-			Mono<ClienteResponse> response = webClient.build().get().uri(URL + "/proveedor/" + cedulaCliente)
+			Mono<ClienteResponse> response = webClient.build().get().uri(URL + "/cliente/" + cedulaCliente)
 					.retrieve().bodyToMono(ClienteResponse.class);
 
 			return response.block();
@@ -91,6 +91,8 @@ public class ClienteServicio implements ICliente {
 
 			return null;
 		}
+		
+		
 	}
 
 	@Override

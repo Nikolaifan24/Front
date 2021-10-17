@@ -14,52 +14,53 @@ public class ClienteDto {
 	
 	private String telefonoCliente;
 
-	
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getcedulaCliente() {
+	public Long getCedulaCliente() {
 		return cedulaCliente;
 	}
 
-	public void setcedulaCliente(Long cedulaCliente) {
+	public void setCedulaCliente(Long cedulaCliente) {
 		this.cedulaCliente = cedulaCliente;
 	}
 
-	public String getdireccionCliente() {
+	public String getDireccionCliente() {
 		return direccionCliente;
 	}
 
-	public void setdireccionCliente(String direccionCliente) {
+	public void setDireccionCliente(String direccionCliente) {
 		this.direccionCliente = direccionCliente;
 	}
 
-	public String getemailCliente() {
+	public String getEmailCliente() {
 		return emailCliente;
 	}
 
-	public void setemailCliente (String emailCliente) {
+	public void setEmailCliente(String emailCliente) {
 		this.emailCliente = emailCliente;
 	}
 
-	public String getnombreCliente() {
+	public String getNombreCliente() {
 		return nombreCliente;
 	}
 
-	public void setnombreCliente(String nombreCliente) {
+	public void setNombreCliente(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
 	}
 
-	public String gettelefonoCliente() {
+	public String getTelefonoCliente() {
 		return telefonoCliente;
 	}
 
-	public void settelefonoCliente(String telefonoCliente) {
+	public void setTelefonoCliente(String telefonoCliente) {
 		this.telefonoCliente = telefonoCliente;
-	}	
+	}
+
+		
 }

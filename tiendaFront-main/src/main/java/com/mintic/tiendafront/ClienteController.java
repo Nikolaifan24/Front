@@ -35,7 +35,7 @@ public class ClienteController {
 	@PostMapping("/cliente")
 	public String crearCliente(Model model, ClienteDto cliente) 
 	{
-		if(cliente.getid().longValue() == 0) {
+		if(cliente.getId().longValue() == 0) {
 			ValidacionCrearCliente(model, cliente);
 			
 			if(ValidacionCrearCliente(model, cliente) == true) 
@@ -45,7 +45,7 @@ public class ClienteController {
 				model.addAttribute("mensaje", "Cliente Creado");			
 			}		
 		}else {
-			icliente.ActualizarCliente(cliente, cliente.getcedulaCliente().longValue());		
+			icliente.ActualizarCliente(cliente, cliente.getCedulaCliente().longValue());		
 			model.addAttribute("clientes", icliente.getClientes());
 			model.addAttribute("mensaje", "Datos del Cliente Actualizados");		
 		}	
@@ -120,27 +120,27 @@ public class ClienteController {
 	
 	private boolean ValidacionCrearCliente(Model model, ClienteDto cliente) 
 	{		
-		if(cliente.getcedulaCliente().longValue() == 0) 
+		if(cliente.getCedulaCliente().longValue() == 0) 
 		{
 			model.addAttribute("mensaje", "Faltan datos del Cliente");
 			return false;
 		}
-		if(cliente.getdireccionCliente().isBlank())
+		if(cliente.getDireccionCliente().isBlank())
 		{
 			model.addAttribute("mensaje", "Faltan datos del Cliente");
 			return false;
 		}
-		if(cliente.getnombreCliente().isBlank()) 
+		if(cliente.getNombreCliente().isBlank()) 
 		{
 			model.addAttribute("mensaje", "Faltan datos del Cliente");
 			return false;
 		}
-		if(cliente.getemailCliente().isBlank()) 
+		if(cliente.getEmailCliente().isBlank()) 
 		{
 			model.addAttribute("mensaje", "Faltan datos del Cliente");
 			return false;
 		}
-		if(cliente.gettelefonoCliente().isBlank()) 
+		if(cliente.getTelefonoCliente().isBlank()) 
 		{
 			model.addAttribute("mensaje", "Faltan datos del Cliente");
 			return false;
@@ -181,5 +181,26 @@ public class ClienteController {
 		return true;
 		
 	}
+	
+	
+	@GetMapping("/reporte")
+	public String reportes() {
+		return "reporte";
+	}
+	
+	
+	@GetMapping("/reporteCliente")
+	public String reportesCliente(Model model) {
+		model.addAttribute("clientes", icliente.getClientes());
+		
+		if(model.getAttribute("clientes") == null) 
+		{
+			model.addAttribute("mensaje", "No hay datos para mostrar");
+		}	
+		
+		return "reporteCliente";
+	}
+	
 
+	
 }

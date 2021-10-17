@@ -34,9 +34,9 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/proveedor">Proveedores</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
+				<li class="nav-item"><a class="nav-link" href="/venta">Ventas</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
+				<li class="nav-item"><a class="nav-link" href="/reporte">Reportes</a></li>
 			</ul>
 
 		</div>

@@ -83,7 +83,6 @@ public class ClientImp implements IClientTienda {
 
 	@Override
 	public UsuarioResponse buscarUsuario(Long cedulaUsuario) {
-		// TODO Auto-generated method stub
 		try {
 
 			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuario/" + cedulaUsuario)
