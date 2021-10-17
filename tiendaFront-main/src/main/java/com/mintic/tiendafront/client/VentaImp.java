@@ -12,7 +12,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.mintic.tiendafront.dto.ClienteDto;
+import com.mintic.tiendafront.dto.ClienteResponse;
 import com.mintic.tiendafront.dto.ProductoDto;
+import com.mintic.tiendafront.dto.ResultadoVentaDto;
 import com.mintic.tiendafront.dto.VentaDto;
 import com.mintic.tiendafront.dto.VentaResponse;
 
@@ -111,6 +113,31 @@ public class VentaImp implements IVenta {
 		} catch (Exception e) {
 
 			return null;
+		}
+	}
+
+	@Override
+	public void guardarVenta(VentaDto totalVenta, Long idUsuario, ClienteResponse cliente) {
+		ResultadoVentaDto resultadoVenta = new ResultadoVentaDto();
+		
+		resultadoVenta.setCodigoVenta((long) Math.random());
+		resultadoVenta.setIdCliente(cliente.getid());
+		resultadoVenta.setIdUsuario(idUsuario);
+		resultadoVenta.setIvaVenta(totalVenta.getIvaTotal());
+		resultadoVenta.setValorVenta(totalVenta.getPrecioTotalSinIva());
+		resultadoVenta.setTotalVenta(totalVenta.getPrecioTotal());
+		
+		
+		try {
+			webClient.build().post().uri(URL + "/guardarVenta")
+			.body(Mono.just(resultadoVenta), Void.class)
+			.retrieve().bodyToMono(Void.class).block();
+			
+		
+		} catch (WebClientResponseException e) {
+			e.getMessage();
+			System.out.println("---->" + e.getMessage());
+		
 		}
 	}
 	

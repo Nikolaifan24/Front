@@ -52,6 +52,16 @@
 					
 				<div class="container overflow-hidden">
 					<div class="form-group">
+						<label for="cedulaCliente"> cedulaCliente:</label>
+						<input type="text"
+							name="cedulaCliente" id="cedulaCliente"
+							value="${producto.cedulaCliente}" class="form-control" />
+					</div>
+					
+					
+					
+				
+					<div class="form-group">
 						<label for="codigoProducto1"> codigo producto 1:</label>
 						<input type="text"
 							name="codigoProducto1" id="codigoProducto1"
@@ -102,6 +112,7 @@
 					<th>codigo</th>
 					<th>cantidad</th>
 					<th>nombre producto</th>
+					<th>precio compra</th>
 					<th>iva compra</th>
 					<th>valor total</th>
 					
@@ -115,6 +126,7 @@
 					<td>${totalVenta.codigoProducto1}</td>
 					<td>${totalVenta.cantidadProducto1}</td>
 					<td>${totalVenta.nombreProducto1}</td>
+					<td>${totalVenta.precioProducto1}</td>
 					<td>${totalVenta.ivaProducto1}</td>
 					<td>${totalVenta.precioProducto1}</td>
 				</tr>
@@ -124,6 +136,7 @@
 					<td>${totalVenta.codigoProducto2}</td>
 					<td>${totalVenta.cantidadProducto2}</td>
 					<td>${totalVenta.nombreProducto2}</td>
+					<td>${totalVenta.precioProducto2}</td>
 					<td>${totalVenta.ivaProducto2}</td>
 					<td>${totalVenta.precioProducto2}</td>
 				</tr>
@@ -133,6 +146,7 @@
 					<td>${totalVenta.codigoProducto3}</td>
 					<td>${totalVenta.cantidadProducto3}</td>
 					<td>${totalVenta.nombreProducto3}</td>
+					<td>${totalVenta.precioProducto3}</td>
 					<td>${totalVenta.ivaProducto3}</td>
 					<td>${totalVenta.precioProducto3}</td>
 				</tr>

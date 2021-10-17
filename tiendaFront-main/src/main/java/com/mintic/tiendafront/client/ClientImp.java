@@ -24,24 +24,23 @@ public class ClientImp implements IClientTienda {
 	private WebClient.Builder webClient;
 
 	@Override
-	public int login(LoginDto loginDto) {
+	public Long login(LoginDto loginDto) {
 		try {
 			/*
 			 * aqui nos conectamos al back  directamente al controlador donde estan las rutas 
 			 * el back espera recibir un dto  por eso enviamos el dto login dto
 			  * */
 
-			Mono<Integer> response = webClient.build().post().uri(URL + "/loginclient")
+			Mono<Long> response = webClient.build().post().uri(URL + "/loginclient")
 					.accept(MediaType.APPLICATION_JSON).body(Mono.just(loginDto), LoginDto.class).retrieve()
-					.bodyToMono(Integer.class);
+					.bodyToMono(Long.class);
 
-			//Aqui se captura la respuesta del back 
 			return response.block();
 
 		} catch (WebClientResponseException e) {
 			e.getMessage();
 			System.out.println("---->" + e.getMessage());
-			return 0;
+			return 0l;
 		}
 
 	}

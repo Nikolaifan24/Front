@@ -9,7 +9,7 @@ import com.mintic.tiendafront.dto.TipoDocumento;
 
 public interface IClientTienda {
 
-	public int login(LoginDto loginDto);
+	public Long login(LoginDto loginDto);
 
 	public List<UsuarioResponse> getUsuarios();
 

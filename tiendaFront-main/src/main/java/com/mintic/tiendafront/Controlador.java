@@ -33,9 +33,9 @@ public class Controlador {
 	
 	@PostMapping("/login")
 	public String login(Model model, LoginDto loginDto) {
-		int validLogin = clienteTienda.login(loginDto);
-
-		if (validLogin == 1) {
+		Long validLogin = clienteTienda.login(loginDto);
+		System.out.println("El id del usuario es: " + validLogin);
+		if (validLogin != 0) {
 			return "menu";
 		} else {
 			model.addAttribute("error", "Usuario o constraseña invalidos.");

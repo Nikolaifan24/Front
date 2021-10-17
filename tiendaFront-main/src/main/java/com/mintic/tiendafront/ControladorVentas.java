@@ -15,16 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mintic.tiendafront.client.IClientTienda;
+import com.mintic.tiendafront.client.ICliente;
 import com.mintic.tiendafront.client.IProducto;
 import com.mintic.tiendafront.client.IVenta;
 
 import com.mintic.tiendafront.dto.ClienteDto;
+import com.mintic.tiendafront.dto.ClienteResponse;
 import com.mintic.tiendafront.dto.LoginDto;
 import com.mintic.tiendafront.dto.ProductoDto;
 import com.mintic.tiendafront.dto.ProductoVenta;
+import com.mintic.tiendafront.dto.ResultadoVentaDto;
 import com.mintic.tiendafront.dto.UsuarioResponse;
 import com.mintic.tiendafront.dto.VentaDto;
 import com.mintic.tiendafront.dto.VentaResponse;
+import com.mintic.tiendafront.Controlador;
 
 @Controller
 public class ControladorVentas {
@@ -32,24 +37,27 @@ public class ControladorVentas {
 	@Autowired
 	IVenta iVenta;
 	
+	@Autowired
+	IClientTienda clienteTienda;
+	
+	@Autowired
+	ICliente icliente;
+	
+	LoginDto loginDto;
 	
 	
-	
+
 	@GetMapping("/venta")
 	public String b() {
+		//Controlador controlador = new Controlador();
+		//System.out.println(" Esto es una prueba: " +controlador.clienteTienda.login(loginDto));
 		return "venta";
 	}
 	
-	
-	
 	@PostMapping("/venta")
 	public String buscarProducto(Model model, ProductoVenta productosVenta) {
-		/*if (codigoProducto != null) {
-			ProductoDto producto = iVenta.getProduct(Long.valueOf(codigoProducto));
-			CalculoDto calculo = iCalculo.addProduct(Long.valueOf(codigoProducto));
-			model.addAttribute("producto", producto);
-			model.addAttribute("calculo", calculo);
-		}*/
+		Long idUsuario = 1l;
+		ClienteResponse cliente = icliente.buscarCliente(productosVenta.getCedulaCliente());
 		
 		ProductoDto producto1 = iVenta.getProduct(Long.valueOf(productosVenta.getCodigoProducto1()));
 		ProductoDto producto2 = iVenta.getProduct(Long.valueOf(productosVenta.getCodigoProducto2()));
@@ -60,6 +68,11 @@ public class ControladorVentas {
 		productosMap.put(producto2,  productosVenta.getCantidadProducto2());
 		productosMap.put(producto3,  productosVenta.getCantidadProducto3());
 		VentaDto totalVenta = iVenta.calcularTotalVenta(productosMap);
+		if (cliente != null && cliente.getcedulaCliente() != null) {
+			iVenta.guardarVenta(totalVenta, idUsuario, cliente );
+		}
+		//VentaDto totalVenta = iVenta.guardarVenta(totalVenta, idUsuario, );
+		
 		
 		model.addAttribute("totalVenta", totalVenta);
 		

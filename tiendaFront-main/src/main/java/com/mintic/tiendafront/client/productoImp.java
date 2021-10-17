@@ -36,7 +36,7 @@ public class productoImp implements IProducto {
 			webClient.build().post().uri(URL + "/producto")
 			.body(Mono.just(producto), Void.class)
 			.retrieve().bodyToMono(Void.class).block();
-			System.out.println("Finished request");
+			
 		
 		} catch (WebClientResponseException e) {
 			e.getMessage();
